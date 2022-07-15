@@ -1,6 +1,6 @@
 import React from "react";
 
-import fetchImages from 'components/API/API';
+import fetchImages from 'API/API';
 import {Searchbar} from 'components/Searchbar/Searchbar';
 import {ImageGallery} from 'components/ImageGallery/ImageGallery';
 import {MessageError} from 'components/MessageError/MessageError';
@@ -9,6 +9,7 @@ import {Button} from 'components/Button/Button';
 
 
 const Status = {
+
   IDLE: 'idle',
   PENDING: 'pending',
   RESOLVED: 'resolved',
@@ -17,7 +18,7 @@ const Status = {
 
 
 export class App extends React.Component {
-  setState = {
+  state = {
     error: null,
     status: 'idle',
     imgValue: '',
@@ -25,6 +26,7 @@ export class App extends React.Component {
     images: [],
   }
 
+  componentDidMount() {}
   componentDidUpdate(_, prevState) {
     const prevPage = prevState.page;
     const nextPage = this.state.page;
@@ -33,7 +35,7 @@ export class App extends React.Component {
 
   if(prevValue !== nextValue || prevPage !== nextPage) {
     this.renderImages();
-    // console.log(this.state.imgValue);
+    console.log(this.state.imgValue);
   }
 }
 
@@ -44,11 +46,11 @@ handleFormSubmit = newImgValue => {
 renderImages = () => {
 const {page, imgValue} = this.state;
 const fetch = fetchImages(page, imgValue);
-// fetchImages(page, imgValue)
+
 fetch
-.then(data => 
+.then(response => 
   this.setState(prevState => ({
-    images: [...prevState.images, ...data.hits],
+    images: [...prevState.images, ...response.hits],
     page: prevState.page + 1,
        
  })),
@@ -61,7 +63,7 @@ console.log(this.state.imgValue);
 
   render() {
 
-    const { status, error } = this.state;
+  const { status, error } = this.state;
 
   return (
     <>
@@ -73,7 +75,7 @@ console.log(this.state.imgValue);
 <MessageError message={error.message} />
 )}
 {status === Status.RESOLVED && (
-  <>
+<>
 <ImageGallery images={this.state.images}/>
 <Button onClick={this.renderImages} />
 </>  )}

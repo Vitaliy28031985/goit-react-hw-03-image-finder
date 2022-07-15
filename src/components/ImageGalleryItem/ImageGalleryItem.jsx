@@ -1,15 +1,17 @@
 import React from "react";
+import s from './ImageGalleryItem.module.css';
 
 export class ImageGalleryItem extends React.Component {
-   // setState = {
+   state = {
       
-   //  }
+    }
 
   render() {
    const { src, alt, } = this.props;
    return (
-<li className="gallery-item">
-  <img 
+<li className={s.ImageGalleryItem}>
+  <img
+  className={s.ImageGalleryItemIimage} 
   src={src}
   alt={alt} />
 </li>

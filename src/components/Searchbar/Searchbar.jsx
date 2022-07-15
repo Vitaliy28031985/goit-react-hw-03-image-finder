@@ -15,14 +15,16 @@ export class Searchbar extends React.Component {
   
    handleSubmit = e => {
    e.preventDefault();
-   
+
   if(this.state.imgValue.trim() === '') {
-   toast("Enter text");
-   return
+   return toast("Enter text");
   }
+
    this.props.onSubmit(this.state.imgValue);
    this.setState({imgValue: ''});
    }
+
+
    render() {
    return (
       <header className={s.Searchbar}>
