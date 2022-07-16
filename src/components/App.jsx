@@ -34,24 +34,26 @@ export class App extends React.Component {
   const nextValue = this.state.imgValue;
 
   if(prevValue !== nextValue) {
+    this.setState({ status: 'pending'});
     this.renderImages();
     console.log(this.state.imgValue);
   }
 }
 
 handleFormSubmit = imgValue => {
-    this.setState({imgValue});
+    this.setState({imgValue,  page: 1, images: [] });
   };
 
   renderImages = () => {
 const {page, imgValue} = this.state;
 const fetch = fetchImages(page, imgValue);
+
 console.log(imgValue);
 
 fetch
 .then(response => 
   this.setState(prevState => ({
-    images: [ ...response.hits],
+    images: [...prevState.images, ...response.hits],
     page: prevState.page + 1,
       // ...prevState.images,
  })),
@@ -69,12 +71,14 @@ console.log(this.state.imgValue);
 
   return (
     <>
+    
 <Searchbar onSubmit={handleFormSubmit}/>
 {status === Status.IDLE && (
-<p className="welcomeText">Please enter your search term</p> )}
+<p>Please enter your search term</p> )}
 {/* {status === Status.PENDING && <Loader />} */}
 {status === Status.REJECTED && (
-<MessageError message={error.message} />
+ <MessageError message={error.message}/>
+
 )}
 {status === Status.RESOLVED && (
 <>
