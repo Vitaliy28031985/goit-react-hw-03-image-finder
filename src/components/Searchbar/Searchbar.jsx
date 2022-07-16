@@ -1,9 +1,11 @@
-import React from "react";
+// import React from "react";
+import React, { Component } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ImSearch } from "react-icons/im";
 import s from './Searchbar.module.css';
 
-export class Searchbar extends React.Component {
+export class Searchbar extends Component {
 
    state = {
    imgValue: '',
@@ -12,39 +14,43 @@ export class Searchbar extends React.Component {
    handleChange = e => {
    this.setState({imgValue: e.currentTarget.value.toLowerCase()});
    }
+   
   
    handleSubmit = e => {
    e.preventDefault();
+   const {imgValue} = this.state;
 
-  if(this.state.imgValue.trim() === '') {
-   return toast("Enter text");
+  if(imgValue.trim() === '') {
+   toast("Enter text");
+    return;
   }
-
-   this.props.onSubmit(this.state.imgValue);
-   this.setState({imgValue: ''});
+   this.props.onSubmit(imgValue);
+   this.setState({ imgValue: '' });
    }
 
 
    render() {
+    const {handleSubmit, handleChange} = this;
    return (
-      <header className={s.Searchbar}>
-      <form onSubmit={this.handleSubmit} className={s.SearchForm}>
-        <button type="submit" className={s.SearchFormButton}>
-          <span className={s.buttonLabel}>Search</span>
-        </button>
+    <>
+<header className={s.Searchbar}>
+<form onSubmit={handleSubmit} className={s.SearchForm}>
+  <button type='submit' className={s.SearchFormButton}>
+     <ImSearch 
+        style={{marginRight: 8}} />
+         <span className={s.buttonLabel}>Search</span>
+            </button>
     
-        <input
-          className={s.input}
-          type="text"
-          autocomplete="off"
-          autofocus
-          placeholder="Search images and photos"
-          onChange={this.handleChange}
-        />
-      </form>
+                <input
+                className={s.input}
+                type='text'
+                autoComplete='off'
+                autoFocus placeholder='Search images and photos'
+                onChange={handleChange}/>
+</form>
       <ToastContainer 
-      position="top-center"
-      autoClose={2000}
+      position='top-center'
+      autoClose={3000}
       hideProgressBar={false}
       newestOnTop={false}
       closeOnClick
@@ -52,6 +58,8 @@ export class Searchbar extends React.Component {
       pauseOnFocusLoss
       draggable
       pauseOnHover/>
-    </header>
-   );}
+</header>
+</>
+   )
+  }
  };

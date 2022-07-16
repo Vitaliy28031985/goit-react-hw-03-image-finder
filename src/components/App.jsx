@@ -1,6 +1,6 @@
 import React from "react";
 
-import fetchImages from 'API/API';
+import fetchImages from 'Api/Api';
 import {Searchbar} from 'components/Searchbar/Searchbar';
 import {ImageGallery} from 'components/ImageGallery/ImageGallery';
 import {MessageError} from 'components/MessageError/MessageError';
@@ -26,33 +26,34 @@ export class App extends React.Component {
     images: [],
   }
 
-  componentDidMount() {}
+  // componentDidMount() {}
+  
   componentDidUpdate(_, prevState) {
-    const prevPage = prevState.page;
-    const nextPage = this.state.page;
-    const prevValue = prevState.imgValue;
-    const nextValue = this.state.imgValue;
 
-  if(prevValue !== nextValue || prevPage !== nextPage) {
+  const prevValue = prevState.imgValue;
+  const nextValue = this.state.imgValue;
+
+  if(prevValue !== nextValue) {
     this.renderImages();
     console.log(this.state.imgValue);
   }
 }
 
-handleFormSubmit = newImgValue => {
-    this.setState({imgValue: newImgValue, page: 1, images: [] });
+handleFormSubmit = imgValue => {
+    this.setState({imgValue});
   };
 
-renderImages = () => {
+  renderImages = () => {
 const {page, imgValue} = this.state;
 const fetch = fetchImages(page, imgValue);
+console.log(imgValue);
 
 fetch
 .then(response => 
   this.setState(prevState => ({
-    images: [...prevState.images, ...response.hits],
+    images: [ ...response.hits],
     page: prevState.page + 1,
-       
+      // ...prevState.images,
  })),
  )
  .catch(error => this.setState({ error, status: Status.REJECTED }))
@@ -63,11 +64,12 @@ console.log(this.state.imgValue);
 
   render() {
 
-  const { status, error } = this.state;
+  const { status, error, images, } = this.state;
+  const {renderImages, handleFormSubmit} = this;
 
   return (
     <>
-<Searchbar onSubmit={this.handleFormSubmit}/>
+<Searchbar onSubmit={handleFormSubmit}/>
 {status === Status.IDLE && (
 <p className="welcomeText">Please enter your search term</p> )}
 {/* {status === Status.PENDING && <Loader />} */}
@@ -76,8 +78,9 @@ console.log(this.state.imgValue);
 )}
 {status === Status.RESOLVED && (
 <>
-<ImageGallery images={this.state.images}/>
-<Button onClick={this.renderImages} />
+<ImageGallery images={images}/>
+<Button onClick={renderImages}
+ />
 </>  )}
 </>
   );}

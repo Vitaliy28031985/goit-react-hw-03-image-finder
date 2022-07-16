@@ -6,22 +6,25 @@ export class ImageGalleryItem extends React.Component {
    state = {
       showModal: false,
     }
-
-    toggleModal = ({showModal}) => {
-      this.setState({showModal: !showModal,})
-    }
-
+    
+    toggleModal = () => {
+      this.setState(({ showModal }) => ({
+        showModal: !showModal,
+      }));
+    };
+ 
   render() {
    const { src, alt, largeImageUrl } = this.props;
    const { showModal } = this.state;
+   const {toggleModal} = this;
    return (
 <li className={s.ImageGalleryItem}>
   <img
-  onClick={this.toggleModal}
+  onClick={toggleModal}
   className={s.ImageGalleryItemIimage} 
   src={src}
   alt={alt} />
-  {showModal && (<Modal onClose={this.toggleModal} src={largeImageUrl} alt={alt} />)}
+  {showModal && (<Modal onClose={toggleModal} src={largeImageUrl} alt={alt} />)}
 </li>
    );
   };
