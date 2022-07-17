@@ -12,7 +12,7 @@ return  fetch(`${url}${fetchEl}`).then(response => {
       return response.json();
    }
 
-   return Promise.reject(new Error('No response from server'));})
+   return Promise.reject(new Error('Nothing was found for your request'));})
 
 }
 //async  await

@@ -1,11 +1,11 @@
 import React from "react";
 
-import fetchImages from 'Api/Api';
+import fetchImages from 'components/Api/Api';
 import {Searchbar} from 'components/Searchbar/Searchbar';
 import {ImageGallery} from 'components/ImageGallery/ImageGallery';
 import {MessageError} from 'components/MessageError/MessageError';
 import {Button} from 'components/Button/Button';
-// import {LoaderComponent} from 'components/Loader/Loader';
+import {LoaderComponent} from 'components/Loader/Loader';
 
 
 const Status = {
@@ -36,7 +36,6 @@ export class App extends React.Component {
   if(prevValue !== nextValue) {
     this.setState({ status: 'pending'});
     this.renderImages();
-    console.log(this.state.imgValue);
   }
 }
 
@@ -48,25 +47,21 @@ handleFormSubmit = imgValue => {
 const {page, imgValue} = this.state;
 const fetch = fetchImages(imgValue, page);
 
-console.log(imgValue);
-
 fetch
 .then(response => 
   this.setState(prevState => ({
     images: [...prevState.images, ...response.hits],
   page: prevState.page + 1,
-      // ...prevState.images,
  })),
  )
  .catch(error => this.setState({ error, status: Status.REJECTED }))
  .finally(() => this.setState({ status: Status.RESOLVED }));
 
-console.log(this.state.imgValue); 
 }
 
   render() {
 
-  const { status, error, images, } = this.state;
+  const { status, error,  images, } = this.state;
   const {renderImages, handleFormSubmit} = this;
 
   return (
@@ -75,10 +70,9 @@ console.log(this.state.imgValue);
 <Searchbar onSubmit={handleFormSubmit}/>
 {status === Status.IDLE && (
 <p>Please enter your search term</p> )}
-{/* {status === Status.PENDING && <LoaderComponent />} */}
+{status === Status.PENDING && <LoaderComponent />}
 {status === Status.REJECTED && (
- <MessageError message={error.message}/>
-
+<MessageError message={error.message}/>
 )}
 {status === Status.RESOLVED && (
 <>
@@ -89,3 +83,4 @@ console.log(this.state.imgValue);
 </>
   );}
 };
+

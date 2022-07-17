@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 
 export class Button extends React.Component {
    static propTypes = {
-      onClick: PropTypes.func.isRequired
+      onClick: PropTypes.func.isRequired,
+      page: PropTypes.number.isRequired,
     };
   
     scroll = () => {

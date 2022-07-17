@@ -1,6 +1,4 @@
 
-
-
 export const MessageError = ({message}) => {
    return (
    <div role="alert">
@@ -8,3 +6,4 @@ export const MessageError = ({message}) => {
    </div>
    )
 }
+
