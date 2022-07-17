@@ -5,7 +5,7 @@ import {Searchbar} from 'components/Searchbar/Searchbar';
 import {ImageGallery} from 'components/ImageGallery/ImageGallery';
 import {MessageError} from 'components/MessageError/MessageError';
 import {Button} from 'components/Button/Button';
-// import {Loader} from 'components/Loader/Loader';
+// import {LoaderComponent} from 'components/Loader/Loader';
 
 
 const Status = {
@@ -46,7 +46,7 @@ handleFormSubmit = imgValue => {
 
   renderImages = () => {
 const {page, imgValue} = this.state;
-const fetch = fetchImages(page, imgValue);
+const fetch = fetchImages(imgValue, page);
 
 console.log(imgValue);
 
@@ -54,7 +54,7 @@ fetch
 .then(response => 
   this.setState(prevState => ({
     images: [...prevState.images, ...response.hits],
-    page: prevState.page + 1,
+  page: prevState.page + 1,
       // ...prevState.images,
  })),
  )
@@ -75,7 +75,7 @@ console.log(this.state.imgValue);
 <Searchbar onSubmit={handleFormSubmit}/>
 {status === Status.IDLE && (
 <p>Please enter your search term</p> )}
-{/* {status === Status.PENDING && <Loader />} */}
+{/* {status === Status.PENDING && <LoaderComponent />} */}
 {status === Status.REJECTED && (
  <MessageError message={error.message}/>
 
