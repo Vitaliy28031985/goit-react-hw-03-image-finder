@@ -35,9 +35,10 @@ export class Modal extends React.Component {
     };
 
     render() {
-      const { src, alt } = this.props;
+      const {src, alt} = this.props;
   
       return createPortal(
+       
         <div className={s.Overlay} onClick={this.handleBackdropClick}>
           <div className={s.Modal}>
             <img src={src} alt={alt} />

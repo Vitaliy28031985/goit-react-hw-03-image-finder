@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import s from './ImageGallery.module.css';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem'
 
-export const ImageGallery = ({images}) => {
+export const ImageGallery = ({images, onToggle, onTogglState}) => {
+ 
    return (
       <ul className={s.ImageGallery}>
          {images.map((image) => (
@@ -11,9 +12,10 @@ export const ImageGallery = ({images}) => {
           src={image.webformatURL}
           alt={image.tags}
           largeImageUrl={image.largeImageURL}
-          />
-
-         ))}
+          onToggle={onToggle}
+          onTogglState={onTogglState}
+          />)) 
+         }
     </ul>  
    );
 }
