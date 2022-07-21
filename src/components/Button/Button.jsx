@@ -10,15 +10,16 @@ export class Button extends React.Component {
     };
   
     scroll = () => {
-      this.props.onClick();
+      this.props.handleClick();
       scroll.scrollToBottom();
     };
   
     render() {
       return (
-        <button onClick={this.scroll} className={s.Button} type="button">
+        <button handleClick={this.scroll} className={s.Button} type="button">
           Load more
         </button>
       );
     }
 }
+//

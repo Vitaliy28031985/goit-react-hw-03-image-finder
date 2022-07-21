@@ -6,6 +6,7 @@ import {ImageGallery} from 'components/ImageGallery/ImageGallery';
 import {MessageError} from 'components/MessageError/MessageError';
 import {Button} from 'components/Button/Button';
 import {LoaderComponent} from 'components/Loader/Loader';
+import { Modal } from 'components/Modal/Modal'
 
 
 const Status = {
@@ -19,22 +20,23 @@ const Status = {
 
 export class App extends React.Component {
   state = {
-    showModal: false,
+    // showModal: false,
     isLoader: false,
     error: null,
     status: 'idle',
     imgValue: '',
     page: 1,
     images: [],
-  
+    largeImageURL: ''
   }
 
   // componentDidMount() {}
   
   componentDidUpdate(_, prevState) {
-
-  const prevValue = prevState.imgValue;
-  const nextValue = this.state.imgValue;
+// const prevPage = prevState.page;
+// const nextPage = this.state.page;
+const prevValue = prevState.imgValue;
+const nextValue = this.state.imgValue;
 
   if(prevValue !== nextValue) {
     
@@ -56,7 +58,7 @@ this.setState({ isLoader: true });
 fetch
 .then(response => 
   this.setState(prevState => ({
-    images: mapperImmage([...prevState.images, ...response.hits]), 
+    images: [...prevState.images, ...mapperImmage(response.hits)], 
     page: prevState.page + 1,
  }), 
  ))
@@ -64,26 +66,41 @@ fetch
  .finally(() => this.setState({ status: Status.RESOLVED,  isLoader: false}));
 }
 
-toggleModal = () => {
-  this.setState(({ showModal }) => ({
-    showModal: !showModal,
-  }));
-};
-
-// changePage = () =>{
-//   this.setState(prevState => {
-//     return {
-//       page: prevState.page + 1,
-//     };
-//   });
-//   this.renderImages();
+// toggleModal = () => {
+//   this.setState(({ showModal }) => ({
+//     showModal: !showModal,
+//   }));
 // };
 
 
+
+changePage = () => {
+  this.setState((prevState) => 
+      ({page: prevState.page + 1}));
+};
+
+togleStatus = (id) => {
+  const {images} = this.state;
+const nawImages = images.map((image) => {
+  if(image.id === id) {
+    return {...image, webformatURL: !image.webformatURL};
+  }
+  return image;
+});
+this.setState({ images: nawImages });
+}
+openModal = (largeImageURL) => {
+  this.setState({largeImageURL})
+}
+
+closeModal = () => {
+  this.setState({largeImageURL: ''})
+}
+
   render() {
 
-  const { status, error, images, isLoader, showModal, } = this.state;
-  const {renderImages, handleFormSubmit, toggleModal} = this;
+  const { status, error, images, isLoader, largeImageURL } = this.state;
+  const { handleFormSubmit, togleStatus, openModal, changePage, closeModal} = this;
 
   return (
     <>    
@@ -96,11 +113,11 @@ toggleModal = () => {
 )}
 {status === Status.RESOLVED && (
 <>
-<ImageGallery images={images} onToggle={toggleModal} onTogglState={showModal}/>
-<Button onClick={renderImages}
+<ImageGallery images={images} handleStatus={togleStatus} handleModal={openModal}/>
+<Button handleClick={changePage}
  />
 </>  )}
-
+{largeImageURL && <Modal poster={largeImageURL} closeModal={closeModal}/>}
 </>
   );}
 };
