@@ -59,7 +59,7 @@ fetch
 .then(response => 
   this.setState(prevState => ({
     images: [...prevState.images, ...mapperImmage(response.hits)], 
-    page: prevState.page + 1,
+    // page: prevState.page + 1,
  }), 
  ))
  .catch(error => this.setState({ error, status: Status.REJECTED }))

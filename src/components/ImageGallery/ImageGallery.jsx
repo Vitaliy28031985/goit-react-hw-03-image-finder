@@ -6,11 +6,13 @@ import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem'
 export const ImageGallery = ({images, handleStatus, handleModal}) => {
    return (
       <ul className={s.ImageGallery}>
-         {images.map(({id, ...restProps}) => (
+         {images.map(({id, webformatURL, largeImageURL, tags}) => (
           <ImageGalleryItem
           key={id + nanoid()}
           id={id}
-          image={restProps}
+          webformatURL={webformatURL}
+          largeImageUR={largeImageURL}
+          tags={tags}
           handleStatus={handleStatus}
           handleModal={handleModal}
           />)) 

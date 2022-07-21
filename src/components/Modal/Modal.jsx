@@ -1,10 +1,10 @@
 import React from "react";
 // import PropTypes from 'prop-types';
 import s from './Modal.module.css';
-import { createPortal } from 'react-dom';
+// import { createPortal } from 'react-dom';
 
 
-const modal = document.querySelector('#modal-root');
+// const modal = document.querySelector('#modal-root');
 
 export class Modal extends React.Component { 
  
@@ -36,7 +36,7 @@ export class Modal extends React.Component {
     render() {
       const {poster, closeModal} = this.props;
   
-      return createPortal(
+      return (
         <div className={s.Overlay} onClick={this.handleBackdropClick}>
           <div className={s.Modal}>
           <img
@@ -44,8 +44,7 @@ export class Modal extends React.Component {
           handleClick={closeModal}
           src={poster} alt="" />
           </div>
-        </div>,
-        modal,
-      );
+        </div>
+      )
     }
 }

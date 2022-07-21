@@ -4,7 +4,10 @@
 import s from './ImageGalleryItem.module.css';
 
 
-export const  ImageGalleryItem = ({ image: webformatURL, largeImageURL, tags },
+export const  ImageGalleryItem = (
+  webformatURL,
+  largeImageURL, 
+  tags,
   id,
   handleStatus,
   handleModal
