@@ -11,9 +11,8 @@ export const ImageGallery = ({images, handleModal}) => {
           key={id}
           
           webformatURL={webformatURL}
-          largeImageUR={largeImageURL}
+          largeImageURL={largeImageURL}
           tags={tags}
-         //  handleStatus={handleStatus}
           handleModal={handleModal}
           />)) 
          }

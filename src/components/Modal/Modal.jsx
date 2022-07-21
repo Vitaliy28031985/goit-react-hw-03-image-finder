@@ -23,28 +23,28 @@ export class Modal extends React.Component {
   
     handleKeyDown = e => {
       if (e.code === 'Escape') {
-        this.props.closeModal();
+        this.props.onModal();
       }
     };
   
     handleBackdropClick = e => {
       if (e.currentTarget === e.target) {
-        this.props.closeModal();
+        this.props.onModal();
       }
     };
 
     render() {
-      const {poster, closeModal} = this.props;
+      const {poster, images, closeModal} = this.props;
   
       return (
         <div className={s.Overlay} onClick={this.handleBackdropClick}>
           <div className={s.Modal}>
           <img
-          // text="Close"
-          handleClick={closeModal}
-          src={poster} alt="" />
+          onModal={closeModal}
+          src={poster} alt={images.tags} />
           </div>
         </div>
       )
     }
 }
+//handleClick

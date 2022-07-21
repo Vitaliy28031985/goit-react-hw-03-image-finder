@@ -2,12 +2,12 @@ import React from "react";
 import { animateScroll as scroll } from 'react-scroll';
 import s from './Button.module.css'
 
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 export class Button extends React.Component {
-   static propTypes = {
-      onClick: PropTypes.func.isRequired,
-    };
+  //  static propTypes = {
+  //   renderImages: PropTypes.func.isRequired,
+  //   };
   
     scroll = () => {
       this.props.handleClick();
@@ -16,7 +16,7 @@ export class Button extends React.Component {
   
     render() {
       return (
-        <button handleClick={this.scroll} className={s.Button} type="button">
+        <button onClick={this.scroll} className={s.Button} type="button">
           Load more
         </button>
       );

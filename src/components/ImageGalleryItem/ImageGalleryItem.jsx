@@ -15,8 +15,7 @@ export const  ImageGalleryItem = (
 <li className={s.ImageGalleryItem}>
   <img
   className={s.ImageGalleryItemIimage}
-  // text="Show poster"
-  handleClick={() => handleModal(largeImageURL)}
+  onClick={() => handleModal(largeImageURL)}
   src={webformatURL}
   alt={tags}/> 
 </li>

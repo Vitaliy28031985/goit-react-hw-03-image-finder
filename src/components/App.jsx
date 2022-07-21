@@ -59,19 +59,12 @@ fetch
 .then(response => 
   this.setState(prevState => ({
     images: [...prevState.images, ...mapperImmage(response.hits)], 
-    // page: prevState.page + 1,
+    page: prevState.page + 1,
  }), 
  ))
  .catch(error => this.setState({ error, status: Status.REJECTED }))
  .finally(() => this.setState({ status: Status.RESOLVED,  isLoader: false}));
 }
-
-// toggleModal = () => {
-//   this.setState(({ showModal }) => ({
-//     showModal: !showModal,
-//   }));
-// };
-
 
 
 changePage = () => {
@@ -92,7 +85,7 @@ closeModal = () => {
   render() {
 
   const { status, error, images, isLoader, largeImageURL } = this.state;
-  const { handleFormSubmit,  openModal, changePage, closeModal} = this;
+  const { handleFormSubmit,  openModal, renderImages, closeModal} = this;
 
   return (
     <>    
@@ -106,11 +99,11 @@ closeModal = () => {
 {status === Status.RESOLVED && (
 <>
 <ImageGallery images={images}  handleModal={openModal}/>
-<Button handleClick={changePage}
+<Button handleClick={renderImages}
  />
 </>  )}
-{largeImageURL && <Modal poster={largeImageURL} closeModal={closeModal}/>}
+{largeImageURL && <Modal poster={largeImageURL} images={images} onModal={closeModal}/>}
 </>
   );}
 };
-//handleStatus={togleStatus}
+
