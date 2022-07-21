@@ -5,12 +5,12 @@ import s from './ImageGalleryItem.module.css';
 
 
 export const  ImageGalleryItem = (
-  webformatURL,
+ { webformatURL,
   largeImageURL, 
   tags,
   id,
   handleStatus,
-  handleModal
+  handleModal}
   ) => {
  
    return (
