@@ -40,7 +40,7 @@ export class Modal extends React.Component {
         <div className={s.Overlay} onClick={this.handleBackdropClick}>
           <div className={s.Modal}>
           <img
-          text="Close"
+          // text="Close"
           handleClick={closeModal}
           src={poster} alt="" />
           </div>

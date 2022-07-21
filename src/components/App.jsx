@@ -77,20 +77,12 @@ fetch
 changePage = () => {
   this.setState((prevState) => 
       ({page: prevState.page + 1}));
+   
 };
 
-togleStatus = (id) => {
-  const {images} = this.state;
-const nawImages = images.map((image) => {
-  if(image.id === id) {
-    return {...image, webformatURL: !image.webformatURL};
-  }
-  return image;
-});
-this.setState({ images: nawImages });
-}
 openModal = (largeImageURL) => {
   this.setState({largeImageURL})
+
 }
 
 closeModal = () => {
@@ -100,7 +92,7 @@ closeModal = () => {
   render() {
 
   const { status, error, images, isLoader, largeImageURL } = this.state;
-  const { handleFormSubmit, togleStatus, openModal, changePage, closeModal} = this;
+  const { handleFormSubmit,  openModal, changePage, closeModal} = this;
 
   return (
     <>    
@@ -113,7 +105,7 @@ closeModal = () => {
 )}
 {status === Status.RESOLVED && (
 <>
-<ImageGallery images={images} handleStatus={togleStatus} handleModal={openModal}/>
+<ImageGallery images={images}  handleModal={openModal}/>
 <Button handleClick={changePage}
  />
 </>  )}
@@ -121,3 +113,4 @@ closeModal = () => {
 </>
   );}
 };
+//handleStatus={togleStatus}

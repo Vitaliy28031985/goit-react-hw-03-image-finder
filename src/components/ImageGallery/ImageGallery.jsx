@@ -1,19 +1,19 @@
 // import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
+
 import s from './ImageGallery.module.css';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem'
 
-export const ImageGallery = ({images, handleStatus, handleModal}) => {
+export const ImageGallery = ({images, handleModal}) => {
    return (
       <ul className={s.ImageGallery}>
          {images.map(({id, webformatURL, largeImageURL, tags}) => (
           <ImageGalleryItem
-          key={id + nanoid()}
-          id={id}
+          key={id}
+          
           webformatURL={webformatURL}
           largeImageUR={largeImageURL}
           tags={tags}
-          handleStatus={handleStatus}
+         //  handleStatus={handleStatus}
           handleModal={handleModal}
           />)) 
          }

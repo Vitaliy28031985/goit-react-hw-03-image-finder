@@ -8,8 +8,6 @@ export const  ImageGalleryItem = (
  { webformatURL,
   largeImageURL, 
   tags,
-  id,
-  handleStatus,
   handleModal}
   ) => {
  
@@ -17,8 +15,7 @@ export const  ImageGalleryItem = (
 <li className={s.ImageGalleryItem}>
   <img
   className={s.ImageGalleryItemIimage}
-  onClick={() => handleStatus(id) > webformatURL.toString()}
-  text="Show poster"
+  // text="Show poster"
   handleClick={() => handleModal(largeImageURL)}
   src={webformatURL}
   alt={tags}/> 
@@ -37,3 +34,4 @@ export const  ImageGalleryItem = (
 //  {onClose={onToggle} 
 //  src={largeImageUrl} 
 //  alt={alt} />)}
+//onClick={() => handleStatus(id) > webformatURL.toString()}
