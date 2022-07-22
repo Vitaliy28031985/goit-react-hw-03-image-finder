@@ -33,12 +33,12 @@ export class App extends React.Component {
 
   
   componentDidUpdate(_, prevState) {
-// const prevPage = prevState.page;
-// const nextPage = this.state.page;
+const prevPage = prevState.page;
+const nextPage = this.state.page;
 const prevValue = prevState.imgValue;
 const nextValue = this.state.imgValue;
 
-  if(prevValue !== nextValue) {
+  if(prevValue !== nextValue || prevPage !== nextPage) {
     
     this.setState({ status: 'pending'});
     this.renderImages();
