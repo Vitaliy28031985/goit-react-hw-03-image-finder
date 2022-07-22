@@ -20,17 +20,17 @@ const Status = {
 
 export class App extends React.Component {
   state = {
-    // showModal: false,
-    isLoader: false,
-    error: null,
-    status: 'idle',
-    imgValue: '',
-    page: 1,
-    images: [],
-    largeImageURL: ''
+  
+  isLoader: false,
+  error: null,
+  status: 'idle',
+  imgValue: '',
+  page: 1,
+  images: [],
+  largeImageURL: ''
   }
 
-  // componentDidMount() {}
+
   
   componentDidUpdate(_, prevState) {
 // const prevPage = prevState.page;
@@ -59,7 +59,7 @@ fetch
 .then(response => 
   this.setState(prevState => ({
     images: [...prevState.images, ...mapperImmage(response.hits)], 
-    page: prevState.page + 1,
+    // page: prevState.page + 1,
  }), 
  ))
  .catch(error => this.setState({ error, status: Status.REJECTED }))
@@ -69,7 +69,7 @@ fetch
 
 changePage = () => {
   this.setState((prevState) => 
-      ({page: prevState.page + 1}));
+  ({page: prevState.page + 1}));
    
 };
 
@@ -85,7 +85,7 @@ closeModal = () => {
   render() {
 
   const { status, error, images, isLoader, largeImageURL } = this.state;
-  const { handleFormSubmit,  openModal, renderImages, closeModal} = this;
+  const { handleFormSubmit,  openModal, changePage, closeModal} = this;
 
   return (
     <>    
@@ -99,7 +99,7 @@ closeModal = () => {
 {status === Status.RESOLVED && (
 <>
 <ImageGallery images={images}  handleModal={openModal}/>
-<Button handleClick={renderImages}
+<Button handleClick={changePage}
  />
 </>  )}
 {largeImageURL && <Modal poster={largeImageURL} images={images} onModal={closeModal}/>}
