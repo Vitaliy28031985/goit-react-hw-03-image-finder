@@ -1,6 +1,6 @@
-// import React from "react";
-// import PropTypes from 'prop-types';
-// import { Modal } from '../Modal/Modal'
+
+import PropTypes from 'prop-types';
+
 import s from './ImageGalleryItem.module.css';
 
 
@@ -21,16 +21,11 @@ export const  ImageGalleryItem = (
 </li>
    );
   };
-  // ImageGalleryItem.propTypes = {
-  //   src: PropTypes.string.isRequired,
-  //   alt: PropTypes.string.isRequired,
-  //   largeImageUrl: PropTypes.string.isRequired,
-  //   onToggle: PropTypes.func.isRequired,
-  //   onTogglState: PropTypes.bool.isRequired
-  // }
+  ImageGalleryItem.propTypes = {
 
-  //{onTogglState && (<Modal 
-//  {onClose={onToggle} 
-//  src={largeImageUrl} 
-//  alt={alt} />)}
-//onClick={() => handleStatus(id) > webformatURL.toString()}
+    webformatURL: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired,
+    largeImageURL: PropTypes.string.isRequired,
+    handleModal: PropTypes.func.isRequired,
+    
+  }

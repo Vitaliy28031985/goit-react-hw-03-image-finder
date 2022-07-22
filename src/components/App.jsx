@@ -70,7 +70,6 @@ fetch
 changePage = () => {
   this.setState((prevState) => 
   ({page: prevState.page + 1}));
-   
 };
 
 openModal = (largeImageURL) => {
