@@ -37,11 +37,12 @@ const prevPage = prevState.page;
 const nextPage = this.state.page;
 const prevValue = prevState.imgValue;
 const nextValue = this.state.imgValue;
+const {page, imgValue} = this.state;
 
   if(prevValue !== nextValue || prevPage !== nextPage) {
     
     this.setState({ status: 'pending'});
-    this.renderImages();
+    this.renderImages(imgValue, page);
     
   }
 }
@@ -50,16 +51,13 @@ handleFormSubmit = imgValue => {
     this.setState({imgValue,  page: 1, images: [] });
   };
 
-  renderImages = () => {
-const {page, imgValue} = this.state;
+renderImages = (imgValue, page) => {
 const fetch = fetchImages(imgValue, page);
 this.setState({ isLoader: true });
-
 fetch
 .then(response => 
   this.setState(prevState => ({
     images: [...prevState.images, ...mapperImmage(response.hits)], 
-    // page: prevState.page + 1,
  }), 
  ))
  .catch(error => this.setState({ error, status: Status.REJECTED }))
@@ -95,7 +93,7 @@ closeModal = () => {
 {status === Status.REJECTED && (
 <MessageError message={error.message}/>
 )}
-{status === Status.RESOLVED && (
+{images.length > 0 && (
 <>
 <ImageGallery images={images}  handleModal={openModal}/>
 <Button handleClick={changePage}
