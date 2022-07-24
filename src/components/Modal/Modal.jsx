@@ -31,13 +31,13 @@ export class Modal extends React.Component {
     };
 
     render() {
-      const {poster, images, closeModal} = this.props;
+      const {poster, images, onModal} = this.props;
   
       return (
         <div className={s.Overlay} onClick={this.handleBackdropClick}>
           <div className={s.Modal}>
           <img
-          onModal={closeModal}
+          onClick={onModal}
           src={poster} alt={images.tags} />
           </div>
         </div>
