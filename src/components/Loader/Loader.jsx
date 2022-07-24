@@ -1,14 +1,13 @@
-import React from "react";
 
 import {TailSpin } from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
-export class LoaderComponent extends React.Component {
-   render() {
+export const LoaderComponent = () => {
+ 
       return (
         <div className="loader" 
         style={{
-          height: '100vh',
+          height: '50vh',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -17,6 +16,5 @@ export class LoaderComponent extends React.Component {
         }}>
         <TailSpin height="100" width="100" color="#3f51b5" ariaLabel="loading" />
       </div>
-      );
-    }  
+      );   
 }
